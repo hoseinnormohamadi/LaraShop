@@ -40,7 +40,7 @@
                                         <td class="td-actions">
                                             <a href="/Admin/Courses/{{$course->id}}" target="_blank"><i class="la la-arrows edit"></i></a>
                                             <a href="/Admin/Courses/{{$course->id}}/edit"><i class="la la-edit edit"></i></a>
-                                            <a href="/Posts/{{$course->id}}/Delete"><i class="la la-close delete"></i></a>
+                                            <a href="/Admin/Courses/{{$course->id}}/Delete"><i class="la la-close delete"></i></a>
                                         </td>
                                     </tr>
                                     @empty

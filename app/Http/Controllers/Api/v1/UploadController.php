@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 
 class UploadController extends Controller
 {
-    public function image(Request $request, Filesystem $filesystem)
+
+    public function image(Request $request)
     {
         $this->validate($request, [
             'image' => 'required|mimes:jpeg,png,jpg|max:2048'

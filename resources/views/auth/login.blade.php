@@ -1,6 +1,83 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
+    <!-- breadcrumb area start -->
+    <section class="breadcrumb-area breadcrumb-bg extra">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-inner"><!-- breadcrumb inner -->
+                        <div class="left-content-area"><!-- left content area -->
+                            <h1 class="title">ورود</h1>
+                        </div><!-- //. left content area -->
+                        <div class="right-content-area">
+                            <ul>
+                                <li><a href="index-2.html">خانه</a></li>
+                                <li>ورود</li>
+                            </ul>
+                        </div>
+                    </div><!-- //. breadcrumb inner -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb area end -->
+
+    <!-- login page content area start -->
+    <div class="login-page-content-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="login-page"><!-- login page wrapper -->
+
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <div class="right-contnet-area">
+                                    <div class="top-content">
+                                        <h4 class="title">ورود به حساب</h4>
+
+                                    </div>
+                                    <div class="bottom-content">
+                                         <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                                            <div class="form-element">
+                                                <input type="email"  name="email" class="input-field" placeholder="نام کاربری یا ایمیل خود را وارد کنید">
+                                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                            </div>
+                                            <div class="form-element">
+                                                <input type="password" name="password" class="input-field" placeholder="رمز عبور">
+                                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                            </div>
+                                             @if (Route::has('password.request'))
+                                    <div class="btn-wrapper">
+                                                <button type="submit" class="submit-btn">ورود</button>
+                                                <a href="{{ route('password.request') }}" class="link">فراموشی رمز عبور</a>
+                                            </div>
+                                @endif
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //.login page wrapper -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+{{--@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -70,4 +147,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection--}}

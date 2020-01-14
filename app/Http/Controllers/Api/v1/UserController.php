@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\v1\payment;
 use App\User;
 use App\Http\Resources\v1\User as UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use App\Payment;
+use App\Http\Resources\v1\payment as PaymentResource;
 class UserController extends Controller
 {
     public function login(Request $request)
@@ -23,10 +23,8 @@ class UserController extends Controller
                 'Status' => 'Error'
             ], 403);
         }
-        auth()->user()->update([
-           'Api_Token' =>  \Str::random(100)
-        ]);
-        return new UserResource(auth()->user());
+        $token = $this->Create_Token();
+        return new UserResource(auth()->user(), $token);
     }
 
     public function register(Request $request)
@@ -42,9 +40,26 @@ class UserController extends Controller
             'password' => Hash::make($validData['password']),
             'Api_Token' => \Str::random(100)
         ]);
-        return new UserResource($user);
+        auth()->login($user);
+        $token = $this->Create_Token();
+        return new UserResource($user , $token);
     }
     public function Courses(){
-         return payment::where('user_id' , auth()->user()->id);
+            $payments = Payment::where('user_id' ,auth()->user()->id)->get();
+            return new PaymentResource($payments);
+    }
+    public function Download($id){
+        $payment = Payment::where([
+            ['user_id','=',auth()->user()->id],
+            ['course_id','=',$id]
+        ])->get();
+        return '/Details/'.$id;
+    }
+
+    public function Create_Token()
+    {
+        auth()->user()->tokens()->delete();
+        return auth()->user()->createToken('Api_Token')->accessToken;
+
     }
 }

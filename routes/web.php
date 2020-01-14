@@ -12,17 +12,21 @@
 */
 
 Route::get('/', 'CourseController@index');
-Route::get('/update', 'CourseController@UpdatePic');
+Route::get('/Details/{CourseID}', 'CourseController@Show');
+Route::get('/Search', 'CourseController@Search');
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('user/profile', 'UserController@profile');
-    Route::get('Admin/', 'AdminController@index');
-    Route::get('Admin/Createnew', 'AdminController@create');
+    Route::get('Admin/', 'AdminController@Index');
+    Route::get('Admin/Createnew', 'AdminController@Create');
     Route::post('Admin/Createnew', 'AdminController@SendToDB');
-    Route::get('Admin/Courses', 'AdminController@Posts');
-    Route::get('Admin/Courses/{CourseID}', 'AdminController@show');
-    Route::get('Admin/Courses/{CourseID}/edit', 'AdminController@edit');
-    Route::put('Admin/Courses/{CourseID}', 'AdminController@update');
+    Route::get('Admin/Courses', 'AdminController@Courses');
+    Route::get('Admin/Courses/{CourseID}', 'AdminController@Show');
+    Route::get('Admin/Courses/{CourseID}/edit', 'AdminController@Edit');
+    Route::get('Admin/Courses/{CourseID}/edit/{EpisodeID}', 'AdminController@EditEpisode');
+    Route::get('Admin/Courses/{CourseID}/Delete', 'AdminController@Delete');
+    Route::put('Admin/Courses/{CourseID}/edit/{EpisodeID}', 'AdminController@UpdateEpisode');
+    Route::put('Admin/Courses/{CourseID}', 'AdminController@Update');
 });
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'CourseController@index')->name('home');

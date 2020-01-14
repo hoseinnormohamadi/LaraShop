@@ -11,18 +11,18 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function Index()
     {
         return view('/Admin.welcome');
     }
 
-    public function create()
+    public function Create()
     {
         return view('Admin.Courses.createnew', [
             'tags' => Tag::all()
         ]);
     }
-    public function show($id){
+    public function Show($id){
         $course = Course::find($id);
         $episodes = Episode::where('course_id', '=', $course->id)->get();
         return view('Admin.Courses.Details',['content' => $course],['Episodes'=>$episodes]);
@@ -48,21 +48,63 @@ class AdminController extends Controller
         return redirect('/Admin/');
 
     }
-    public function edit($id){
+    public function Edit($id){
         $course = Course::find($id);
         return view('Admin.Courses.edit',['course' => $course],[
             'tags' =>Tag::all()
         ]);
     }
+    public function EditEpisode($id,$epid){
+        $episode = Episode::find($epid);
+        if ($episode->course_id == $id){
+            return view('Admin.Courses.edit_episode',['content' => $episode]);
+        }else{
+            return "null";
+        }
+    }
+    public function UpdateEpisode($id,$epid){
+        $episode = Episode::find($epid);
+        if ($episode->course_id == $id){
+            $episode->title = request('title');
+            $episode->body = request('body');
+            $episode->videoUrl = request('VideoUrl');
+            $episode->save();
+             return $this->Show($id);
 
-    public function Posts()
+        }else{
+            return "null";
+        }
+    }
+    public function Update($id){
+        $course =  Course::find($id);
+        if (\request('Pic') != "") {
+            $course->image = $this->UploadPic(request());
+        }
+        $course->title= request('title');
+        $course->body= request('body');
+        $course->price = \request('price');
+        $course->save();
+        $course->tag()->sync(request('tag'));
+        return redirect('/Admin/Courses/');
+    }
+    public function Delete($id){
+        $course =  Course::find($id);
+        if ($course != null) {
+            $course->delete();
+            return redirect('/Admin/Courses/');
+        }else{
+            return redirect('/Admin/Courses');
+        }
+    }
+
+    public function Courses()
     {
         if (request('tag')) {
-            $posts = Tag::where('name', request('tag'))->firstorfail()->posts;
+            $courses = Tag::where('name', request('tag'))->firstOrfail()->courses;
         } else {
-            $posts = Course::all();
+            $courses = Course::all();
         }
-        return view('Admin.Courses.index', ['content' => $posts]);
+        return view('Admin.Courses.index', ['content' => $courses]);
     }
 
     private function ValidateCourse()
@@ -85,7 +127,7 @@ class AdminController extends Controller
 
         $request->Pic->move(public_path('Pics'), $PicName);
 
-        return $PicName;
+        return "/Pics/".$PicName;
     }
 
 }

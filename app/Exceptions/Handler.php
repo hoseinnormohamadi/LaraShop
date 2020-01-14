@@ -67,7 +67,8 @@ class Handler extends ExceptionHandler
                 'data' => 'Not Found',
                 'Status' => 'Error'
             ], 404)
-            : arent::render($request, $exception);
+            :        parent::render($request, $exception);
+
     }
 
     /**

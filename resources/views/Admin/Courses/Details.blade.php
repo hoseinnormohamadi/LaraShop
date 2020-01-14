@@ -13,7 +13,7 @@
                     <div class="row post-video">
                         <div class="col-xl-5 col-lg-5 col-sm-5 col-12">
                             <div class="hover-img">
-                                <img src="/{{$content->image}}" class="img-fluid rounded" alt="...">
+                                <img src="{{$content->image}}" class="img-fluid rounded" alt="...">
                                 <br>
                                 <br>
                                 <p>
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="col-xl-7 col-lg-7 col-sm-7 col-12 mt-auto mb-auto">
-                            <h3>{{$content->title}}</h3>
+                         <a href="/detail/{{$content->id}}">   <h3>{{$content->title}}</h3></a>
                             <p>{!! $content->body !!} </p>
                         </div>
                     </div>
@@ -34,6 +34,7 @@
                     </p>
                     @foreach($Episodes as $episode)
                         <p> جلسه : {{$episode->number}}</p>
+                    <a href="/Admin/Courses/{{$content->id}}/edit/{{$episode->id}}">ویرایش</a>
                         <p> موضوع : {{$episode->title}}</p>
                     @endforeach
                 </div>

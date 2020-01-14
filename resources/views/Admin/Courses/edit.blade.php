@@ -157,8 +157,9 @@
                                                     class="custom-select form-control @error('tag')  border border-danger @enderror"
                                                     multiple>
                                                 <option value="یک تگ را انتخاب کنید">یک تگ را انتخاب کنید</option>
+
                                                 @foreach($tags as $tag)
-                                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                                    <option value="{{$tag->id}}" >{{$tag->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -169,12 +170,12 @@
                                                id="exampleFormControlFile1">
                                     </div>
                                     <div class="form-group">
-                                        <img src="/{{$course->image}}">
+                                        <img src="{{$course->image}}">
                                     </div>
 
                                     <div class="form-group">
                                         <button type="button"
-                                                onclick="addepisode(document.getElementById('episodes_number').value)"
+                                                onclick="next()"
                                                 class="btn btn-gradient-03 mr-1 mb-2">بعدی
                                         </button>
                                     </div>

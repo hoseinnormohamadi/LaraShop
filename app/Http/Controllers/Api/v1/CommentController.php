@@ -9,7 +9,9 @@ class CommentController extends Controller
 {
     public function store(Request $request){
         $validData = $this->validate($request,[
-            'body' => 'required'
+            'body' => 'required',
+            'course_id' => 'required|exists:courses,id',
+            'user_id' => 'required|exists:users,id'
         ]);
         auth()->user()->comments()->create($validData);
         return response([

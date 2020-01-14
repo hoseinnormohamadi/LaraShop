@@ -777,7 +777,7 @@ input:checked + .slider:before {
   .breadcrumb-area.extra {
     padding-bottom: 120px; }
   .breadcrumb-area.breadcrumb-bg {
-    background-image: url(../img/bg/breadcrumb-bg.jpg);
+    /*background-image: url(../img/bg/breadcrumb-bg.jpg);*/
     background-position: center;
     background-size: cover; }
   .breadcrumb-area .left-content-area {

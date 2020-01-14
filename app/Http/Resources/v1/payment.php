@@ -16,4 +16,10 @@ class payment extends JsonResource
     {
         return parent::toArray($request);
     }
+    public function with($request)
+    {
+       return [
+           'Status' => 'Success'
+       ];
+    }
 }
