@@ -9,11 +9,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Payment;
 use App\Http\Resources\v1\payment as PaymentResource;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 class UserController extends Controller
 {
+    public function UserInfo(){
+        return auth()->user();
+    }
     public function login(Request $request)
     {
-        $validData = $this->validate($request, [
+        $input = $request->only('email', 'password');
+        $token = null;
+        if (!$token = JWTAuth::attempt($input)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid Email or Password',
+            ], 401);
+        }
+
+        return response()->json([
+            'success' => true,
+            'token' => $token,
+        ]);
+        /*$validData = $this->validate($request, [
             'email' => 'required|exists:users',
             'password' => 'required',
         ]);
@@ -24,9 +43,8 @@ class UserController extends Controller
             ], 403);
         }
         $token = $this->Create_Token();
-        return new UserResource(auth()->user(), $token);
+        return new UserResource(auth()->user(), $token);*/
     }
-
     public function register(Request $request)
     {
         $validData = $this->validate($request, [
@@ -55,7 +73,6 @@ class UserController extends Controller
         ])->get();
         return '/Details/'.$id;
     }
-
     public function Create_Token()
     {
         auth()->user()->tokens()->delete();

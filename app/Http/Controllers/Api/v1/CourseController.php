@@ -19,19 +19,9 @@ class CourseController extends Controller
         $courses = Course::paginate(2);
         return new CourseCollection($courses);
     }
-    public function single(Course $course){
-        return new CourseResources($course);
-    }
-    public function create(CourseRequest $request){
-
-        $image = $this->upload($request->image);
-        return $image;
-    }
-    public function upload($request){
-        $image = new Uploader();
-        $imageurl = $image->image($request,$request);
-        return $imageurl;
-
+    public function single($id){
+        $course = Course::find($id);
+        return $course;
     }
     public function Search(){
         if (request('tag')) {
