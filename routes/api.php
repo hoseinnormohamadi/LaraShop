@@ -21,10 +21,8 @@ Route::prefix('v1')->namespace('Api\v1')->group(function () {
     Route::post('/login', 'UserController@login');
     Route::post('/register', 'UserController@register');
     Route::get('/Search', 'CourseController@Search');
-    Route::middleware('auth:api')->group(function () {
-        Route::get('/user', function () {
-            return auth()->user();
-        });
+    Route::middleware('jwt.auth')->group(function () {
+        Route::get('/user', 'UserController@UserInfo');
         Route::post('/comment', 'CommentController@store');
         Route::get('/user/myCourses', 'UserController@Courses');
         Route::get('/user/myCourses/{CourseID}', 'UserController@Download');
@@ -33,6 +31,7 @@ Route::prefix('v1')->namespace('Api\v1')->group(function () {
         Route::post('/courses/create', 'CourseController@create');
     });
 });
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

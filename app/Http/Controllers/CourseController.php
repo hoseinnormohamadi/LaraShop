@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Course;
+use App\Episode;
 use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Filesystem\Filesystem;

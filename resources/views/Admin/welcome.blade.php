@@ -1431,4 +1431,5 @@
             {{'Hi '. auth::user()->name}}
         @endauth
     </h1>
+
     @endsection

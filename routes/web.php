@@ -14,7 +14,7 @@
 Route::get('/', 'CourseController@index');
 Route::get('/Details/{CourseID}', 'CourseController@Show');
 Route::get('/Search', 'CourseController@Search');
-
+Route::get('/test', 'CourseController@test');
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('user/profile', 'UserController@profile');

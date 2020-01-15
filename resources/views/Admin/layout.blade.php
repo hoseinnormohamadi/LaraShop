@@ -59,11 +59,14 @@
                 <!-- Begin Navbar Menu -->
                 <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center pull-right">
                     <!-- Begin Notifications -->
-                    <li class="nav-item dropdown"><a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="la la-bell animated infinite swing"></i><span class="badge-pulse"></span></a>
+                    <li class="nav-item dropdown"><a id="notifications" rel="nofollow" data-target="#" href="#"
+                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                     class="nav-link"><i class="la la-bell animated infinite swing"></i><span
+                                class="badge-pulse"></span></a>
                         <ul aria-labelledby="notifications" class="dropdown-menu notification">
                             <li>
                                 <div class="notifications-header">
-                                    <div class="title">اعلان ها (4)</div>
+                                    <div class="title">اعلان ها (<span class="notif-count">0</span>)</div>
                                     <div class="notifications-overlay"></div>
                                     <img src="/img/notifications/01.jpg" alt="..." class="img-fluid">
                                 </div>
@@ -121,17 +124,23 @@
                                 </a>
                             </li>
                             <li>
-                                <a rel="nofollow" href="#" class="dropdown-item all-notifications text-center">مشاهده همه اعلانها</a>
+                                <a rel="nofollow" href="#" class="dropdown-item all-notifications text-center">مشاهده
+                                    همه اعلانها</a>
                             </li>
                         </ul>
                     </li>
                     <!-- End Notifications -->
                     <!-- User -->
-                    <li class="nav-item dropdown"><a id="user" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><img src="/img/avatar/avatar-01.jpg" alt="..." class="avatar rounded-circle"></a>
+                    <li class="nav-item dropdown"><a id="user" rel="nofollow" data-target="#" href="#"
+                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                     class="nav-link"><img src="{{ (new Laravolt\Avatar\Avatar)->create('Hosein Atashgah')->toBase64()}}
+                                " alt="..."
+                                                                           class="avatar rounded-circle"></a>
                         <ul aria-labelledby="user" class="user-size dropdown-menu">
                             <li class="welcome">
                                 <a href="#" class="edit-profil"><i class="la la-gear"></i></a>
-                                <img src="/img/avatar/avatar-01.jpg" alt="..." class="rounded-circle">
+                                <img src="{{ (new Laravolt\Avatar\Avatar)->create('Hosein Atashgah')->toBase64()}}
+                                    " alt="..." class="rounded-circle">
                             </li>
                             <li>
                                 <a href="pages-profile.html" class="dropdown-item">
@@ -154,7 +163,9 @@
                                     پرسش و پاسخ
                                 </a>
                             </li>
-                            <li><a rel="nofollow" href="{{ route('logout') }}"  onclick="event.preventDefault();  document.getElementById('logout-form').submit();" class="dropdown-item logout text-center"><i class="ti-power-off"></i></a></li>
+                            <li><a rel="nofollow" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();  document.getElementById('logout-form').submit();"
+                                   class="dropdown-item logout text-center"><i class="ti-power-off"></i></a></li>
                         </ul>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
@@ -176,9 +187,9 @@
                 <!-- Begin Main Navigation -->
                 <ul class="list-unstyled">
                     @auth
-                    <li><a href="/"><i class="ti ti-home"></i><span>خانه</span></a></li>
-                    <li><a href="/Admin/Createnew"><i class="ti ti-plus"></i><span>افزودن دوره</span></a></li>
-                    <li><a href="/Admin/Courses"><i class="la la-eye"></i><span>مشاهده دوره ها</span></a></li>
+                        <li><a href="/"><i class="ti ti-home"></i><span>خانه</span></a></li>
+                        <li><a href="/Admin/Createnew"><i class="ti ti-plus"></i><span>افزودن دوره</span></a></li>
+                        <li><a href="/Admin/Courses"><i class="la la-eye"></i><span>مشاهده دوره ها</span></a></li>
                     @else
                         <li><a href="/Admin/register"><i class="la la-user-plus"></i><span>ثبت نام</span></a></li>
                         <li><a href="/Admin/login"><i class="la la-user"></i><span>ورود</span></a></li>
@@ -225,7 +236,7 @@
                     </div>
                 </div>
             </footer>--}}
-            <!-- End Page Footer -->
+        <!-- End Page Footer -->
             <a href="#" class="go-top"><i class="la la-arrow-up"></i></a>
         </div>
         <!-- End Content -->
